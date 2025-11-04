@@ -12,7 +12,36 @@ namespace Cola_de_prioridad
 {
     public partial class Form1 : Form
     {
-        private List<int> colaPrioridad = new List<int>();
+        class Paciente
+        {
+            public string Nombre { get; set; }
+            public int Prioridad { get; set; }
+
+            public override string ToString()
+            {
+                string tipo;
+
+                switch (Prioridad)
+                {
+                    case 3:
+                        tipo = "Alta";
+                        break;
+                    case 2:
+                        tipo = "Media";
+                        break;
+                    case 1:
+                        tipo = "Baja";
+                        break;
+                    default:
+                        tipo = "Desconocida";
+                        break;
+                }
+
+                return $"{Nombre} (Prioridad: {tipo})";
+            }
+        }
+
+        private List<Paciente> cola = new List<Paciente>();
 
         public Form1()
         {
@@ -26,45 +55,54 @@ namespace Cola_de_prioridad
 
         private void btnEncolar_Click(object sender, EventArgs e)
         {
-            // Validar entrada
-            if (int.TryParse(txtNumero.Text, out int valor))
+            if (string.IsNullOrWhiteSpace(txtNombre.Text) || cmbPrioridad.SelectedIndex == -1)
             {
-                colaPrioridad.Add(valor);
-                ActualizarLista();
-                txtNumero.Clear();
-                txtNumero.Focus();
+                MessageBox.Show("Ingrese un nombre y seleccione una prioridad.");
+                return;
             }
-            else
+
+            Paciente nuevo = new Paciente()
             {
-                MessageBox.Show("Ingrese un número válido.");
-            }
+                Nombre = txtNombre.Text,
+                Prioridad = int.Parse(cmbPrioridad.SelectedItem.ToString())
+            };
+
+            cola.Add(nuevo);
+            ActualizarLista();
+            txtNombre.Clear();
+            cmbPrioridad.SelectedIndex = -1;
 
         }
 
         private void btnDesencolar_Click(object sender, EventArgs e)
         {
-            if (colaPrioridad.Count == 0)
+            if (cola.Count == 0)
             {
-                MessageBox.Show("La cola está vacía.");
+                MessageBox.Show("No hay pacientes en espera.");
                 return;
             }
 
-            // Buscar el número mayor (mayor prioridad)
-            int mayor = colaPrioridad.Max();
-            colaPrioridad.Remove(mayor);
+            // Busca el paciente con mayor prioridad
+            int maxPrioridad = cola.Max(p => p.Prioridad);
+            Paciente siguiente = cola.First(p => p.Prioridad == maxPrioridad);
 
-            MessageBox.Show($"Se atendió el elemento con prioridad: {mayor}");
+            cola.Remove(siguiente);
+            MessageBox.Show($"Atendiendo a: {siguiente.Nombre} (Prioridad: {siguiente.Prioridad})");
             ActualizarLista();
 
         }
         private void ActualizarLista()
         {
-            // Mostrar cola ordenada (de mayor a menor)
             lstCola.Items.Clear();
-            foreach (int n in colaPrioridad.OrderByDescending(x => x))
+            foreach (Paciente p in cola.OrderByDescending(p => p.Prioridad))
             {
-                lstCola.Items.Add(n);
+                lstCola.Items.Add(p);
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

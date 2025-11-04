@@ -28,46 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtNumero = new System.Windows.Forms.TextBox();
+            this.lblNombre = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnEncolar = new System.Windows.Forms.Button();
             this.btnDesencolar = new System.Windows.Forms.Button();
             this.lstCola = new System.Windows.Forms.ListBox();
+            this.lblPrioridad = new System.Windows.Forms.Label();
+            this.cmbPrioridad = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // label1
+            // lblNombre
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Número";
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(40, 49);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(105, 16);
+            this.lblNombre.TabIndex = 0;
+            this.lblNombre.Text = "Paciente / Caso:";
             // 
-            // txtNumero
+            // txtNombre
             // 
-            this.txtNumero.Location = new System.Drawing.Point(43, 86);
-            this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(259, 22);
-            this.txtNumero.TabIndex = 1;
+            this.txtNombre.Location = new System.Drawing.Point(43, 97);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(259, 22);
+            this.txtNombre.TabIndex = 1;
             // 
             // btnEncolar
             // 
-            this.btnEncolar.Location = new System.Drawing.Point(43, 146);
+            this.btnEncolar.Location = new System.Drawing.Point(43, 207);
             this.btnEncolar.Name = "btnEncolar";
             this.btnEncolar.Size = new System.Drawing.Size(120, 40);
             this.btnEncolar.TabIndex = 2;
-            this.btnEncolar.Text = "Encolar";
+            this.btnEncolar.Text = "Agregar Paciente";
             this.btnEncolar.UseVisualStyleBackColor = true;
             this.btnEncolar.Click += new System.EventHandler(this.btnEncolar_Click);
             // 
             // btnDesencolar
             // 
-            this.btnDesencolar.Location = new System.Drawing.Point(182, 146);
+            this.btnDesencolar.Location = new System.Drawing.Point(182, 207);
             this.btnDesencolar.Name = "btnDesencolar";
             this.btnDesencolar.Size = new System.Drawing.Size(120, 40);
             this.btnDesencolar.TabIndex = 3;
-            this.btnDesencolar.Text = "Desencolar";
+            this.btnDesencolar.Text = "Atender paciente";
             this.btnDesencolar.UseVisualStyleBackColor = true;
             this.btnDesencolar.Click += new System.EventHandler(this.btnDesencolar_Click);
             // 
@@ -75,21 +77,46 @@
             // 
             this.lstCola.FormattingEnabled = true;
             this.lstCola.ItemHeight = 16;
-            this.lstCola.Location = new System.Drawing.Point(43, 210);
+            this.lstCola.Location = new System.Drawing.Point(43, 253);
             this.lstCola.Name = "lstCola";
             this.lstCola.Size = new System.Drawing.Size(259, 84);
             this.lstCola.TabIndex = 4;
+            // 
+            // lblPrioridad
+            // 
+            this.lblPrioridad.AutoSize = true;
+            this.lblPrioridad.Location = new System.Drawing.Point(40, 133);
+            this.lblPrioridad.Name = "lblPrioridad";
+            this.lblPrioridad.Size = new System.Drawing.Size(219, 16);
+            this.lblPrioridad.TabIndex = 5;
+            this.lblPrioridad.Text = "Prioridad (1=Baja, 2=Media, 3=Alta):";
+            // 
+            // cmbPrioridad
+            // 
+            this.cmbPrioridad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPrioridad.FormattingEnabled = true;
+            this.cmbPrioridad.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
+            this.cmbPrioridad.Location = new System.Drawing.Point(43, 162);
+            this.cmbPrioridad.Name = "cmbPrioridad";
+            this.cmbPrioridad.Size = new System.Drawing.Size(198, 24);
+            this.cmbPrioridad.TabIndex = 6;
+            this.cmbPrioridad.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 359);
+            this.Controls.Add(this.cmbPrioridad);
+            this.Controls.Add(this.lblPrioridad);
             this.Controls.Add(this.lstCola);
             this.Controls.Add(this.btnDesencolar);
             this.Controls.Add(this.btnEncolar);
-            this.Controls.Add(this.txtNumero);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.lblNombre);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -100,11 +127,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtNumero;
+        private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button btnEncolar;
         private System.Windows.Forms.Button btnDesencolar;
         private System.Windows.Forms.ListBox lstCola;
+        private System.Windows.Forms.Label lblPrioridad;
+        private System.Windows.Forms.ComboBox cmbPrioridad;
     }
 }
 
